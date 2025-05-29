@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DPDP Compliance Cost Calculator - Frontline Intel</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <div class="header__content">
+                <div class="header__brand">
+                    <h1 class="header__title">Frontline Intel</h1>
+                    <p class="header__tagline">Policy Translated into Action</p>
+                </div>
+                <div class="header__main">
+                    <h2 class="header__headline">Calculate Your True DPDP Compliance Costs</h2>
+                    <p class="header__subtitle">Why most startups underestimate compliance costs by 300%</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Calculator Section -->
+    <main class="main">
+        <div class="container">
+            <div class="calculator">
+                
+                <!-- Left Panel - Calculator Inputs -->
+                <div class="calculator__inputs">
+                    <div class="card">
+                        <div class="card__body">
+                            <h3 class="section-title">Company Details</h3>
+                            
+                            <!-- Company Size -->
+                            <div class="form-group">
+                                <label class="form-label">Company Size</label>
+                                <div class="radio-group">
+                                    <label class="radio-item">
+                                        <input type="radio" name="companySize" value="startup" checked>
+                                        <span class="radio-label">Startup (0-50 employees)</span>
+                                    </label>
+                                    <label class="radio-item">
+                                        <input type="radio" name="companySize" value="medium">
+                                        <span class="radio-label">Medium (51-200 employees)</span>
+                                    </label>
+                                    <label class="radio-item">
+                                        <input type="radio" name="companySize" value="large">
+                                        <span class="radio-label">Large (200+ employees)</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Annual Turnover -->
+                            <div class="form-group">
+                                <label class="form-label" for="turnover">Annual Turnover (₹ Crores)</label>
+                                <input type="number" id="turnover" class="form-control" placeholder="Enter annual turnover" min="0" step="0.1">
+                                <div class="threshold-indicator" id="thresholdIndicator">
+                                    <span class="status status--info">Below ₹40 crore threshold - Startup relief applicable</span>
+                                </div>
+                            </div>
+
+                            <!-- Business Type -->
+                            <div class="form-group">
+                                <label class="form-label" for="businessType">Business Type</label>
+                                <select id="businessType" class="form-control">
+                                    <option value="AI/ML">AI/ML</option>
+                                    <option value="Climate-tech">Climate-tech</option>
+                                    <option value="E-commerce">E-commerce</option>
+                                    <option value="SaaS/Software">SaaS/Software</option>
+                                    <option value="Fintech">Fintech</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+
+                            <!-- Data Volume -->
+                            <div class="form-group">
+                                <label class="form-label" for="dataVolume">Data Volume</label>
+                                <select id="dataVolume" class="form-control">
+                                    <option value="Under 1 lakh">Under 1 lakh records</option>
+                                    <option value="1-10 lakh">1-10 lakh records</option>
+                                    <option value="10 lakh-1 crore">10 lakh-1 crore records</option>
+                                    <option value="1+ crore">1+ crore records</option>
+                                </select>
+                            </div>
+
+                            <!-- Current Compliance Level -->
+                            <div class="form-group">
+                                <label class="form-label">Current Compliance Level</label>
+                                <div class="radio-group">
+                                    <label class="radio-item">
+                                        <input type="radio" name="complianceLevel" value="No preparation" checked>
+                                        <span class="radio-label">No preparation</span>
+                                    </label>
+                                    <label class="radio-item">
+                                        <input type="radio" name="complianceLevel" value="Basic">
+                                        <span class="radio-label">Basic</span>
+                                    </label>
+                                    <label class="radio-item">
+                                        <input type="radio" name="complianceLevel" value="Intermediate">
+                                        <span class="radio-label">Intermediate</span>
+                                    </label>
+                                    <label class="radio-item">
+                                        <input type="radio" name="complianceLevel" value="Advanced">
+                                        <span class="radio-label">Advanced</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Children's Data Processing -->
+                            <div class="form-group">
+                                <label class="form-label">Children's Data Processing</label>
+                                <div class="toggle-group">
+                                    <label class="toggle-item">
+                                        <input type="radio" name="childrenData" value="no" checked>
+                                        <span class="toggle-label">No</span>
+                                    </label>
+                                    <label class="toggle-item">
+                                        <input type="radio" name="childrenData" value="yes">
+                                        <span class="toggle-label">Yes</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Panel - Results -->
+                <div class="calculator__results">
+                    
+                    <!-- Cost Breakdown -->
+                    <div class="card mb-24">
+                        <div class="card__body">
+                            <h3 class="section-title">Cost Estimate</h3>
+                            
+                            <div class="cost-summary">
+                                <div class="cost-main">
+                                    <span class="cost-amount" id="totalCost">₹5,00,000</span>
+                                    <div class="cost-details">
+                                        <div class="cost-detail" id="startupRelief" style="display: none;">
+                                            <span class="status status--success">30% Startup Relief Applied</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Risk Assessment -->
+                            <div class="risk-assessment">
+                                <h4 class="risk-title">Risk Assessment</h4>
+                                <div class="risk-meter">
+                                    <div class="risk-bar">
+                                        <div class="risk-fill" id="riskFill"></div>
+                                    </div>
+                                    <span class="risk-label" id="riskLabel">Moderate Risk</span>
+                                </div>
+                                <p class="risk-description" id="riskDescription">
+                                    Maximum penalty exposure: ₹250 crores for data breaches
+                                </p>
+                            </div>
+
+                            <!-- Cost Breakdown Chart -->
+                            <div class="chart-container">
+                                <canvas id="costChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Implementation Timeline -->
+                    <div class="card">
+                        <div class="card__body">
+                            <h3 class="section-title">Implementation Timeline</h3>
+                            <div class="timeline-summary">
+                                <span class="timeline-duration" id="timelineDuration">5-6 months</span>
+                                <span class="timeline-description">Recommended implementation period</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Dynamic Implementation Roadmap -->
+    <section class="roadmap">
+        <div class="container">
+            <div class="roadmap__header">
+                <h2 class="roadmap__title" id="roadmapTitle">Your Personalized Implementation Action Plan</h2>
+                <p class="roadmap__subtitle" id="roadmapSubtitle">Tailored specifically for AI/ML startups</p>
+            </div>
+            
+            <div class="roadmap__content" id="roadmapContent">
+                <!-- Dynamic content will be generated here -->
+            </div>
+
+            <div class="roadmap__considerations" id="roadmapConsiderations">
+                <!-- Dynamic considerations will be generated here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Lead Capture Section -->
+    <section class="lead-capture">
+        <div class="container">
+            <div class="lead-capture__content">
+                <h2 class="lead-capture__title">Get Your Free DPDP Implementation Checklist</h2>
+                <p class="lead-capture__description">Download a personalized checklist with detailed steps, templates, and timelines based on your company profile.</p>
+                
+                <form class="lead-form" id="leadForm">
+                    <div class="lead-form__inputs">
+                        <input type="email" class="form-control" placeholder="Enter your email address" required>
+                        <input type="text" class="form-control" placeholder="Company name" required>
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--lg">Download Free Checklist</button>
+                </form>
+
+                <div class="lead-capture__footer">
+                    <p>Want personalized guidance? <a href="#" target="_blank">Schedule a free consultation</a></p>
+                    <p><a href="#" target="_blank">Subscribe to our newsletter</a> for weekly policy updates</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="app.js"></script>
+</body>
+</html>
